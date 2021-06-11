@@ -206,13 +206,20 @@ def file_upload():
                 ['actual', 'profit_margin', 'A_profit_margin',  'B_profit_margin', 'C_profit_margin', 'D_profit_margin', 'E_profit_margin', 'F_profit_margin'],
                 ['actual', 'profit_margin'])
 
-                st.markdown('` ` `actual = 単位：JPY（万）` ` ` ')
-                st.markdown('` ` `profit_margin = %` ` ` ')
+                st.markdown('` ` `actual = 単位：JPY（万） | profit_margin = %` ` ` ')
 
-                fig = sns.pairplot(df7, hue='wc_code',
-                vars = options4)
-
+                fig = sns.pairplot(df7, hue='wc_code',vars = options4)
                 st.pyplot(fig)
+
+                df10 = df4[['target_term', 'channel_flg', 'actual', 'profit_margin']]
+                df10['actual'] = round(df10['actual']/10000)
+
+                fig2 = sns.catplot(x='target_term', y='actual', data=df10, kind='bar', hue='channel_flg', palette='Spectral')
+                st.pyplot(fig2)
+
+                fig3 = sns.catplot(x='target_term', y='profit_margin', data=df10, kind='bar', hue='channel_flg', palette='Spectral')
+                st.pyplot(fig3)
+                st.markdown('` ` `棒グラフ上に描かれる黒い線 = 95%信頼区間でのnerror bar（外れ値）を示している。95%信頼区間とは、95%の確率で平均値がこの部分に含まれるという範囲のこと。` ` ` ')
         else:
              st.error('This file is not the specified csv file.')
     else:
