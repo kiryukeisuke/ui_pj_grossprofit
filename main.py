@@ -210,7 +210,8 @@ def file_upload():
                 ['actual', 'profit_margin', 'A_profit_margin',  'B_profit_margin', 'C_profit_margin', 'D_profit_margin', 'E_profit_margin', 'F_profit_margin'],
                 ['actual', 'profit_margin'])
 
-                st.markdown('` ` `actual = 単位：JPY（万） | profit_margin = %` ` ` ')
+                st.markdown('` ` `actual = 単位：JPY（万）` ` ` ')
+                st.markdown('` ` `profit_margin = %` ` ` ')
 
                 fig = sns.pairplot(df7, hue='wc_code',vars = options4)
                 st.pyplot(fig)
