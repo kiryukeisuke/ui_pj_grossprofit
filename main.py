@@ -186,8 +186,12 @@ def file_upload():
                         st.markdown(linko, unsafe_allow_html=True)
 
             st.markdown('### Fundamental statistics')
-            st.markdown('` ` `基本統計量を表示` ` ` ')
+            st.markdown('` ` `合計値を表示` ` ` ')
+            df11 = pd.DataFrame(df4,columns=['actual','retail','wholesale','profit'])
+            sum_df = df11.sum(axis = 0)
+            st.dataframe(sum_df)
 
+            st.markdown('` ` `基本統計量を表示` ` ` ')
             df6 = round(df4[['actual', 'retail', 'wholesale', 'profit', 'profit_margin']].describe())
             st.dataframe(df6)
 
