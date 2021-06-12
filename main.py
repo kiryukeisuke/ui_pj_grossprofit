@@ -17,6 +17,7 @@ def file_upload():
         df = pd.read_csv(upload_file,encoding='shift-jis')
         csv_col_cnt = len(df.columns)
 
+        # if csv_col_cnt == 125:
         if csv_col_cnt == 117:
 
             row_cnt_all = len(df)
@@ -224,7 +225,7 @@ def file_upload():
 
                 fig3 = sns.catplot(x='target_term', y='profit_margin', data=df10, kind='bar', hue='channel_flg', palette='Spectral')
                 st.pyplot(fig3)
-                st.markdown('` ` `棒グラフ上に描かれる黒い線 = 95%信頼区間でのnerror bar（外れ値）を示している。95%信頼区間とは、95%の確率で平均値がこの部分に含まれるという範囲のこと。` ` ` ')
+                st.markdown('` ` `棒グラフ上に描かれる黒い線 = 95%信頼区間でのnerror barを示している。95%信頼区間とは、95%の確率で平均値がこの部分に含まれるという範囲のこと。` ` ` ')
         else:
              st.error('This file is not the specified csv file.')
     else:
