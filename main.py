@@ -2,6 +2,8 @@ import streamlit as st
 # import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+
 import seaborn as sns
 # import datetime
 # from tkinter import filedialog
@@ -17,8 +19,8 @@ def file_upload():
         df = pd.read_csv(upload_file,encoding='shift-jis')
         csv_col_cnt = len(df.columns)
 
-        # if csv_col_cnt == 125:
-        if csv_col_cnt == 117:
+        if csv_col_cnt == 128:
+        # if csv_col_cnt == 117:
 
             row_cnt_all = len(df)
             df_col = list(df.columns)
@@ -27,7 +29,8 @@ def file_upload():
             st.markdown('` ` `抽出条件を指定` ` ` ')
 
             # wb_codeのlistを生成
-            wb_code_ls = df['wb_code']
+            wb_code_ls = df.sort_values('wb_code')
+            wb_code_ls = wb_code_ls['wb_code']
             wb_code_ls =wb_code_ls.drop_duplicates(keep='last')
             wb_code_ls = wb_code_ls.values.tolist()
 
@@ -78,6 +81,7 @@ def file_upload():
                 'Shopify',
                 'stores',
                 'Yahoo',
+                'Ebay',
                 'muzaiko',
                 ]
                 )
@@ -215,6 +219,12 @@ def file_upload():
                 st.markdown('` ` `profit_margin = %` ` ` ')
 
                 fig = sns.pairplot(df7, hue='wc_code',vars = options4)
+
+                # x軸(xaxis)に対して、10ごと目盛りを入れる
+                # ax = plt.gca()
+                # ax.xaxis.set_major_locator(ticker.MultipleLocator(10))
+
+                # グラフ表示
                 st.pyplot(fig)
 
                 df10 = df4[['target_term', 'channel_flg', 'actual', 'profit_margin']]
