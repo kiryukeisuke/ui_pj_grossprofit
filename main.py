@@ -19,7 +19,7 @@ def file_upload():
         df = pd.read_csv(upload_file,encoding='shift-jis')
         csv_col_cnt = len(df.columns)
 
-        if csv_col_cnt == 128:
+        if csv_col_cnt == 131:
         # if csv_col_cnt == 117:
 
             row_cnt_all = len(df)
